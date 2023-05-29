@@ -17,6 +17,7 @@ public class PlayerAction : MonoBehaviour
     /*---- 変数宣言 ----*/
     public float moveSpeed = 0.005f;
     public float jumpPower = 80.0f;
+    public float Power = 3.0f;
     Vector3 bulletPos;//弾の位置
     float xLimit = 26.0f;
     float yLimit = 18.0f;
@@ -37,7 +38,6 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         /*---- キー移動 ----*/
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
@@ -60,16 +60,22 @@ public class PlayerAction : MonoBehaviour
         player_pos.y = Mathf.Clamp(player_pos.y, -yLimit, yLimit);
         transform.position = new Vector2(player_pos.x, player_pos.y);
 
+        /*---- 移動制限 ----*/
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
     /*---- ジャンプ ----*/
     //トリガーと他のオブジェクトが接触
+    //床との接触
     void OnTriggerEnter2D(Collider2D floor)
     {
         if (floor.tag == floorTag)
         {
             isJump = true;
         }
-       if(floor.tag == boxTag)
+        else if (floor.tag == boxTag)
         {
             isJump = true;
         }
@@ -82,7 +88,10 @@ public class PlayerAction : MonoBehaviour
         {
             isJump = false;
         }
-     
+        else if (floor.tag == boxTag)
+        {
+            isJump = false;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -92,25 +101,28 @@ public class PlayerAction : MonoBehaviour
             //ボックスの移動
             if (Input.GetKey(KeyCode.Z))
             {
-
-                if (isLeft)
+                if (Power >= 1)
                 {
-                    collision.transform.Translate(-2, 0, 0);
+                    if (isLeft)
+                    {
+                        collision.transform.Translate(-2, 0, 0);
+                    }
+                    else if (isRight)
+                    {
+                        collision.transform.Translate(2, 0, 0);
+                    }
                 }
-                else if (isRight)
-                {
-                    collision.transform.Translate(2, 0, 0);
-                }
+                Power -= 1;
             }
             //ボックスの破壊
             if (Input.GetKey(KeyCode.X))
             {
-                Destroy(collision.gameObject);
+                if (Power >= 2)
+                {
+                    Destroy(collision.gameObject);
+                    Power -= 2;
+                }
             }
-        }
-        if (collision.collider.tag == goalTag)
-        {
-            SceneManager.LoadScene("GameClear");
         }
     }
 }
