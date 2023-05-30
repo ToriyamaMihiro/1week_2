@@ -62,6 +62,7 @@
     <Compile Include="Assets\Player\PlayerAction.cs" />
     <Compile Include="Assets\Player\CollisionController.cs" />
     <Compile Include="Assets\Scenes\SceanManeger.cs" />
+    <Compile Include="Assets\Box\BoxHit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

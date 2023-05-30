@@ -18,7 +18,7 @@ public class PlayerAction : MonoBehaviour
     public float moveSpeed = 0.005f;
     public float jumpPower = 80.0f;
     public float Power = 3.0f;
-    Vector3 bulletPos;//弾の位置
+
     float xLimit = 26.0f;
     float yLimit = 18.0f;
     bool isRight = false;
@@ -38,13 +38,13 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         /*---- キー移動 ----*/
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
             isRight = false;
             isLeft = true;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
             isRight = true;
@@ -53,6 +53,7 @@ public class PlayerAction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isJump)
         {
             this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+
         }
         /*---- 移動制限 ----*/
         Vector3 player_pos = transform.position;
@@ -69,16 +70,17 @@ public class PlayerAction : MonoBehaviour
     /*---- ジャンプ ----*/
     //トリガーと他のオブジェクトが接触
     //床との接触
-   
+
 
     //トリガーと他のオブジェクトが離れた
-    void OnCollisionStayExit2D(Collider2D floor)
+    private void OnCollisionExit2D(Collision2D floor)
     {
-        if (floor.tag == floorTag)
+
+        if (floor.collider.tag == floorTag)
         {
             isJump = false;
         }
-        else if (floor.tag == boxTag)
+        else if (floor.collider.tag == boxTag)
         {
             isJump = false;
         }
@@ -90,7 +92,7 @@ public class PlayerAction : MonoBehaviour
         {
             isJump = true;
         }
-      
+
         if (collision.collider.tag == boxTag)
         {
             isJump = true;
