@@ -63,6 +63,7 @@
     <Compile Include="Assets\Player\PlayerAction.cs" />
     <Compile Include="Assets\Player\CollisionController.cs" />
     <Compile Include="Assets\Box\BoxHit.cs" />
+    <Compile Include="Assets\Particle\ParticleManeger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

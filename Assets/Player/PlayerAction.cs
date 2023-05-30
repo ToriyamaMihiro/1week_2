@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerAction : MonoBehaviour
 {
     //public GameObject box;
-    public BoxCollider2D col;
+    public GameObject particlePrefab;
 
     Rigidbody2D rigidbody2D;
 
@@ -25,6 +26,8 @@ public class PlayerAction : MonoBehaviour
     bool isLeft = true;
     bool isHit = false;
     bool isJump = false;
+    float particleTime = 0;
+    float particleCoolTime = 60;
     private Rigidbody2D rb = null;
 
     // Start is called before the first frame update
@@ -37,24 +40,45 @@ public class PlayerAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        particleTime++;
+
         /*---- キー移動 ----*/
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+            if (particleTime % particleCoolTime == 0)
+            {
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+            }
             isRight = false;
             isLeft = true;
         }
+
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+            if (particleTime % particleCoolTime == 0)
+            {
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+
+            }
             isRight = true;
             isLeft = false;
         }
+
         if (Input.GetKeyDown(KeyCode.Space) && isJump)
         {
+            if (particleTime % particleCoolTime == 0)
+            {
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+            }
             this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
-
+        
         }
+
         /*---- 移動制限 ----*/
         Vector3 player_pos = transform.position;
         player_pos.x = Mathf.Clamp(player_pos.x, -xLimit, xLimit);
@@ -75,7 +99,6 @@ public class PlayerAction : MonoBehaviour
     //トリガーと他のオブジェクトが離れた
     private void OnCollisionExit2D(Collision2D floor)
     {
-
         if (floor.collider.tag == floorTag)
         {
             isJump = false;
