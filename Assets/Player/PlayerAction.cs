@@ -18,7 +18,7 @@ public class PlayerAction : MonoBehaviour
     public float moveSpeed = 0.005f;
     public float jumpPower = 80.0f;
     public float Power = 3.0f;
-    Vector3 bulletPos;//’e‚ÌˆÊ’u
+  
     float xLimit = 26.0f;
     float yLimit = 18.0f;
     bool isRight = false;
