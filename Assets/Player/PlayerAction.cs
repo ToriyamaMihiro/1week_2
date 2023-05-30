@@ -69,20 +69,10 @@ public class PlayerAction : MonoBehaviour
     /*---- ジャンプ ----*/
     //トリガーと他のオブジェクトが接触
     //床との接触
-    void OnTriggerEnter2D(Collider2D floor)
-    {
-        if (floor.tag == floorTag)
-        {
-            isJump = true;
-        }
-        else if (floor.tag == boxTag)
-        {
-            isJump = true;
-        }
-    }
+   
 
     //トリガーと他のオブジェクトが離れた
-    void OnTriggerExit2D(Collider2D floor)
+    void OnCollisionStayExit2D(Collider2D floor)
     {
         if (floor.tag == floorTag)
         {
@@ -96,8 +86,14 @@ public class PlayerAction : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if (collision.collider.tag == floorTag)
+        {
+            isJump = true;
+        }
+      
         if (collision.collider.tag == boxTag)
         {
+            isJump = true;
             //ボックスの移動
             if (Input.GetKey(KeyCode.Z))
             {
