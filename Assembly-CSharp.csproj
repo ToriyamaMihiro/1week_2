@@ -57,11 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Box\BoxManeger.cs" />
-    <Compile Include="Assets\Scenes\Title\Title.cs" />
-    <Compile Include="Assets\Scenes\SceanManeger.cs" />
-    <Compile Include="Assets\Scenes\Goal.cs" />
+    <Compile Include="Assets\Player\Scenes\Title\Title.cs" />
+    <Compile Include="Assets\Player\Scenes\SceanManeger.cs" />
+    <Compile Include="Assets\Player\Scenes\Goal.cs" />
     <Compile Include="Assets\Player\PlayerAction.cs" />
     <Compile Include="Assets\Player\CollisionController.cs" />
+    <Compile Include="Assets\WallManegar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
