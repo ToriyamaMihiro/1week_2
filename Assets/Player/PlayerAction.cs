@@ -38,13 +38,13 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         /*---- ÉLÅ[à⁄ìÆ ----*/
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
             isRight = false;
             isLeft = true;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
             isRight = true;
