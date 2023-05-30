@@ -56,8 +56,12 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player\PlayerAction.cs" />
     <Compile Include="Assets\Box\BoxManeger.cs" />
+    <Compile Include="Assets\Scenes\Title\Title.cs" />
+    <Compile Include="Assets\Scenes\Goal.cs" />
+    <Compile Include="Assets\Player\PlayerAction.cs" />
+    <Compile Include="Assets\Player\CollisionController.cs" />
+    <Compile Include="Assets\Scenes\SceanManeger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
