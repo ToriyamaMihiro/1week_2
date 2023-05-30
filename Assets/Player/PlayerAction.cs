@@ -53,6 +53,7 @@ public class PlayerAction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isJump)
         {
             this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+           
         }
         /*---- 移動制限 ----*/
         Vector3 player_pos = transform.position;
@@ -69,16 +70,19 @@ public class PlayerAction : MonoBehaviour
     /*---- ジャンプ ----*/
     //トリガーと他のオブジェクトが接触
     //床との接触
-   
+
 
     //トリガーと他のオブジェクトが離れた
-    void OnCollisionStayExit2D(Collider2D floor)
+
+   
+    private void OnCollisionExit2D(Collision2D floor)
     {
-        if (floor.tag == floorTag)
+
+        if (floor.collider.tag == floorTag)
         {
             isJump = false;
         }
-        else if (floor.tag == boxTag)
+        else if (floor.collider.tag == boxTag)
         {
             isJump = false;
         }
